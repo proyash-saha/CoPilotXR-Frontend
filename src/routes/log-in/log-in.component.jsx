@@ -1,29 +1,27 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Axios from "axios";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
-
-import { isExistingUser } from "../../backend/user.auth";
+import { API_CODES } from "../../utils/api-code";
+import { API_STATUS } from "../../utils/api-status";
 
 import "./log-in.styles.scss";
 
-const defaultFormFields = {
+const DEFAULT_FORM_FIELDS = {
   email: "",
   password: "",
 };
+const BASE_URL_FOR_SERVER = "http://localhost:3001";
 
 const LogIn = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const { email, password } = formFields;
 
   const navigate = useNavigate();
   const goToHomeHandler = () => {
     navigate("/home");
-  };
-
-  const resetFormInputFields = () => {
-    setFormFields(defaultFormFields);
   };
 
   const handleFormInputChange = (event) => {
@@ -34,14 +32,36 @@ const LogIn = () => {
   const handleFormSubmit = async (event) => {
     try {
       event.preventDefault();
-      const userIsValid = isExistingUser(email, password);
-      if (!userIsValid) {
-        throw new Error("User is invalid!");
+      const { data } = await Axios.post(`${BASE_URL_FOR_SERVER}/login`, {
+        email: email,
+        password: password,
+      });
+
+      if (
+        data.status === API_STATUS.unauthorized &&
+        data.code === API_CODES.notFound
+      ) {
+        throw new Error("User not found.");
       }
+
+      if (
+        data.status === API_STATUS.unauthorized &&
+        data.code === API_CODES.badRequest
+      ) {
+        throw new Error("Incorrect username or password.");
+      }
+
+      if (
+        data.status === API_STATUS.internalServerError &&
+        data.code === API_CODES.internalServerError
+      ) {
+        throw new Error("Internal Server Error.");
+      }
+
       goToHomeHandler();
     } catch (error) {
       console.log(
-        "log-in.component - handleFormSubmit() - Error: User log in failed.",
+        "log-in.component - handleFormSubmit() - Error: User log in failed.\n",
         error
       );
     }

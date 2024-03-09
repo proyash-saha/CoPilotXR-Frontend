@@ -1,29 +1,27 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Axios from "axios";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
-
-import { registerUser } from "../../backend/user.auth";
+import { API_CODES } from "../../utils/api-code";
+import { API_STATUS } from "../../utils/api-status";
 
 import "./register.styles.scss";
 
-const defaultFormFields = {
+const DEFAULT_FORM_FIELDS = {
   email: "",
   password: "",
 };
+const BASE_URL_FOR_SERVER = "http://localhost:3001";
 
 const Register = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const { email, password } = formFields;
 
   const navigate = useNavigate();
   const goToHomeHandler = () => {
     navigate("/home");
-  };
-
-  const resetFormInputFields = () => {
-    setFormFields(defaultFormFields);
   };
 
   const handleFormInputChange = (event) => {
@@ -34,11 +32,29 @@ const Register = () => {
   const handleFormSubmit = async (event) => {
     try {
       event.preventDefault();
-      registerUser(email, password);
+      const { data } = await Axios.post(`${BASE_URL_FOR_SERVER}/register`, {
+        email: email,
+        password: password,
+      });
+
+      if (
+        data.status === API_STATUS.conflict &&
+        data.code === API_CODES.alreadyExists
+      ) {
+        throw new Error("User with the same email address already exists.");
+      }
+
+      if (
+        data.status === API_STATUS.internalServerError &&
+        data.code === API_CODES.internalServerError
+      ) {
+        throw new Error("Internal Server Error.");
+      }
+
       goToHomeHandler();
     } catch (error) {
       console.log(
-        "register.component - handleFormSubmit() - Error: User registration failed.",
+        "register.component - handleFormSubmit() - Error: User registration failed.\n",
         error
       );
     }
