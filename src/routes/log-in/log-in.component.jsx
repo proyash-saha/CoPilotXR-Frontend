@@ -4,8 +4,8 @@ import Axios from "axios";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
-import { API_CODES } from "../../utils/api-code";
-import { API_STATUS } from "../../utils/api-status";
+import { API_CODES } from "../../utils/api-code.utils";
+import { API_STATUS } from "../../utils/api-status.utils";
 
 import "./log-in.styles.scss";
 
