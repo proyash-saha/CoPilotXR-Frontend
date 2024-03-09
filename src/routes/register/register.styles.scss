@@ -1,0 +1,16 @@
+.register-container {
+  display: flex;
+  padding: 200px;
+  justify-content: center;
+
+  .log-in-container {
+    color: white;
+    padding: 0;
+    margin: 20px;
+  }
+
+  .log-in-link {
+    color: rgb(236, 62, 52);
+    text-decoration: none;
+  }
+}

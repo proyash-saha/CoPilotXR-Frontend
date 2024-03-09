@@ -1,0 +1,25 @@
+.form-input-container {
+  align-items: center;
+  margin-bottom: 15px;
+
+  .label {
+    font-size: 23px;
+    font-weight: bold;
+    color: rgb(236, 62, 52);
+  }
+
+  .form-input {
+    margin-top: 5px;
+    border-radius: 10px;
+    padding-left: 10px;
+    height: 40px;
+    width: 300px;
+    font-size: 20px;
+  }
+
+  .form-input:focus {
+    outline: none !important;
+    border-color: rgb(236, 62, 52);
+    box-shadow: 0 0 7px #ffa077;
+  }
+}
