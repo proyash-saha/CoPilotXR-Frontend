@@ -20,21 +20,23 @@ const Account = () => {
 
   return (
     <div className="tabs-container">
-      <div className="tab-header">
-        {tabs.map((tab) => (
-          <div
-            key={tab}
-            className={`tab ${activeTab === tab ? "active" : ""}`}
-            onClick={() => handleTabChange(tab)}
-          >
-            {tab}
-          </div>
-        ))}
-      </div>
-      <div className="tab-content">
-        {activeTab === ACC_INFO_HEADER && <AccountInformation />}
-        {activeTab === SUBS_HEADER && <Subscription />}
-        {activeTab === DOWNLOAD_HEADER && <Downloads />}
+      <div>
+        <div className="tab-header">
+          {tabs.map((tab) => (
+            <div
+              key={tab}
+              className={`tab ${activeTab === tab ? "active" : ""}`}
+              onClick={() => handleTabChange(tab)}
+            >
+              {tab}
+            </div>
+          ))}
+        </div>
+        <div className="tab-content">
+          {activeTab === ACC_INFO_HEADER && <AccountInformation />}
+          {activeTab === SUBS_HEADER && <Subscription />}
+          {activeTab === DOWNLOAD_HEADER && <Downloads />}
+        </div>
       </div>
     </div>
   );
