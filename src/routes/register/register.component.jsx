@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Axios from "axios";
 
@@ -6,6 +6,7 @@ import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
 import { API_CODES } from "../../utils/api-code.utils";
 import { API_STATUS } from "../../utils/api-status.utils";
+import { UserContext } from "../../contexts/user.context";
 
 import "./register.styles.scss";
 
@@ -16,6 +17,7 @@ const DEFAULT_FORM_FIELDS = {
 const BASE_URL_FOR_SERVER = "http://localhost:3001";
 
 const Register = () => {
+  const { login } = useContext(UserContext);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const { email, password } = formFields;
 
@@ -51,6 +53,8 @@ const Register = () => {
         throw new Error("Internal Server Error.");
       }
 
+      const userData = { email: email };
+      login(userData);
       goToHomeHandler();
     } catch (error) {
       console.log(

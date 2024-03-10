@@ -42,5 +42,38 @@
         color: rgb(236, 62, 52);
       }
     }
+
+    .home-nav-link {
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        color: rgb(236, 62, 52);
+      }
+    }
+
+    .account-nav-link {
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        color: rgb(236, 62, 52);
+      }
+    }
+
+    .log-out-nav-link {
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        color: rgb(236, 62, 52);
+      }
+    }
   }
 }
