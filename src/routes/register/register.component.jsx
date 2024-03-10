@@ -46,7 +46,7 @@ const Register = () => {
         data.status === API_STATUS.conflict &&
         data.code === API_CODES.alreadyExists
       ) {
-        setErrorMessage("You'r account already exists. Please log in.");
+        setErrorMessage("Your account already exists. Please log in.");
         throw new Error("User with the same email address already exists.");
       }
 
