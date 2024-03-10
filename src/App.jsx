@@ -24,7 +24,6 @@ const PrivateRoute = ({ element, canNavigate }) => {
 
 const App = () => {
   const { user } = useContext(UserContext);
-  console.log("user = ", user);
 
   return (
     <Routes>

@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import Axios from "axios";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
-import ErrorMessage from "../../components/error-message/error-message.component";
 
 import { API_CODES } from "../../utils/api-code.utils";
 import { API_STATUS } from "../../utils/api-status.utils";
@@ -22,7 +22,6 @@ const LogIn = () => {
   const { login } = useContext(UserContext);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const { email, password } = formFields;
-  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
   const goToHomeHandler = () => {
@@ -46,7 +45,9 @@ const LogIn = () => {
         data.status === API_STATUS.unauthorized &&
         data.code === API_CODES.notFound
       ) {
-        setErrorMessage("Couldn't find your account. Please register.");
+        toast("Couldn't find your account. Please register.", {
+          id: "1",
+        });
         throw new Error("User not found.");
       }
 
@@ -54,7 +55,9 @@ const LogIn = () => {
         data.status === API_STATUS.unauthorized &&
         data.code === API_CODES.badRequest
       ) {
-        setErrorMessage("Incorrect username or password.");
+        toast("Incorrect username or password.", {
+          id: "2",
+        });
         throw new Error("Incorrect username or password.");
       }
 
@@ -62,7 +65,9 @@ const LogIn = () => {
         data.status === API_STATUS.internalServerError &&
         data.code === API_CODES.internalServerError
       ) {
-        setErrorMessage("Oops! Something went wrong.");
+        toast("Oops! Something went wrong.", {
+          id: "3",
+        });
         throw new Error("Internal Server Error.");
       }
 
@@ -79,6 +84,13 @@ const LogIn = () => {
 
   return (
     <div className="log-in-container">
+      <Toaster
+        position="top-center"
+        containerStyle={{
+          top: 80,
+        }}
+      />
+
       <form onSubmit={handleFormSubmit}>
         <FormInput
           label="Email"
@@ -106,8 +118,6 @@ const LogIn = () => {
             Register
           </Link>
         </p>
-
-        <ErrorMessage message={errorMessage} />
       </form>
     </div>
   );
