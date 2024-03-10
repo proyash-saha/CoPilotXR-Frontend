@@ -4,6 +4,8 @@ import Axios from "axios";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
+import ErrorMessage from "../../components/error-message/error-message.component";
+
 import { API_CODES } from "../../utils/api-code.utils";
 import { API_STATUS } from "../../utils/api-status.utils";
 import { UserContext } from "../../contexts/user.context";
@@ -20,6 +22,7 @@ const LogIn = () => {
   const { login } = useContext(UserContext);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const { email, password } = formFields;
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
   const goToHomeHandler = () => {
@@ -43,6 +46,7 @@ const LogIn = () => {
         data.status === API_STATUS.unauthorized &&
         data.code === API_CODES.notFound
       ) {
+        setErrorMessage("Couldn't find your account. Please register.");
         throw new Error("User not found.");
       }
 
@@ -50,6 +54,7 @@ const LogIn = () => {
         data.status === API_STATUS.unauthorized &&
         data.code === API_CODES.badRequest
       ) {
+        setErrorMessage("Incorrect username or password.");
         throw new Error("Incorrect username or password.");
       }
 
@@ -57,6 +62,7 @@ const LogIn = () => {
         data.status === API_STATUS.internalServerError &&
         data.code === API_CODES.internalServerError
       ) {
+        setErrorMessage("Oops! Something went wrong.");
         throw new Error("Internal Server Error.");
       }
 
@@ -100,6 +106,8 @@ const LogIn = () => {
             Register
           </Link>
         </p>
+
+        <ErrorMessage message={errorMessage} />
       </form>
     </div>
   );
