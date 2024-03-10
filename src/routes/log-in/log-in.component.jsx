@@ -71,7 +71,7 @@ const LogIn = () => {
         throw new Error("Internal Server Error.");
       }
 
-      const userData = { email: email };
+      const userData = data.data;
       login(userData);
       goToHomeHandler();
     } catch (error) {

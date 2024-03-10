@@ -13,6 +13,8 @@ import { UserContext } from "../../contexts/user.context";
 import "./register.styles.scss";
 
 const DEFAULT_FORM_FIELDS = {
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
 };
@@ -21,7 +23,7 @@ const BASE_URL_FOR_SERVER = "http://localhost:3001";
 const Register = () => {
   const { login } = useContext(UserContext);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
-  const { email, password } = formFields;
+  const { firstName, lastName, email, password } = formFields;
 
   const navigate = useNavigate();
   const goToHomeHandler = () => {
@@ -37,6 +39,8 @@ const Register = () => {
     try {
       event.preventDefault();
       const { data } = await Axios.post(`${BASE_URL_FOR_SERVER}/register`, {
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         password: password,
       });
@@ -61,7 +65,7 @@ const Register = () => {
         throw new Error("Internal Server Error.");
       }
 
-      const userData = { email: email };
+      const userData = data.data;
       login(userData);
       goToHomeHandler();
     } catch (error) {
@@ -82,6 +86,24 @@ const Register = () => {
       />
 
       <form onSubmit={handleFormSubmit}>
+        <FormInput
+          label="First name"
+          type="text"
+          required
+          onChange={handleFormInputChange}
+          name="firstName"
+          value={firstName}
+        />
+
+        <FormInput
+          label="Last name"
+          type="text"
+          required
+          onChange={handleFormInputChange}
+          name="lastName"
+          value={lastName}
+        />
+
         <FormInput
           label="Email"
           type="email"
