@@ -18,11 +18,29 @@
     align-items: center;
     justify-content: flex-end;
 
-    .nav-link {
+    .log-in-nav-link {
       padding: 10px;
       color: white;
       font-weight: bold;
       text-decoration: none;
+
+      &:hover {
+        color: rgb(236, 62, 52);
+      }
+    }
+
+    .register-nav-link {
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid;
+      border-radius: 10px;
+      border-color: rgb(236, 62, 52);
+
+      &:hover {
+        color: rgb(236, 62, 52);
+      }
     }
   }
 }

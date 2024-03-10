@@ -13,10 +13,10 @@ const Navigation = () => {
           <img className="logo" src={CoPilotXRLogo} alt="CoPilotXRLogo" />
         </Link>
         <div className="nav-links-container">
-          <Link className="nav-link" to="/log-in">
+          <Link className="log-in-nav-link" to="/log-in">
             Log In
           </Link>
-          <Link className="nav-link" to="/register">
+          <Link className="register-nav-link" to="/register">
             Register
           </Link>
         </div>
