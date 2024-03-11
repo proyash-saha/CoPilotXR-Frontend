@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 
+import ChatBot from "../chatbot/chatbot.component";
+
 import CoPilotXRLogo from "../../assets/CoPilotXR_01.png";
 
 import "./landing-page.styles.scss";
@@ -12,6 +14,7 @@ const LandingPage = () => {
       <div>
         <img className="logo" src={CoPilotXRLogo} alt="CoPilotXRLogo" />
       </div>
+      <ChatBot />
       <Outlet />
     </div>
   );

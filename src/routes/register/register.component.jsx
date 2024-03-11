@@ -5,6 +5,7 @@ import Axios from "axios";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/primary-button/primary-button.component";
+import ChatBot from "../../components/chatbot/chatbot.component";
 
 import { API_CODES } from "../../utils/api-code.utils";
 import { API_STATUS } from "../../utils/api-status.utils";
@@ -131,6 +132,8 @@ const Register = () => {
           </Link>
         </p>
       </form>
+
+      <ChatBot />
     </div>
   );
 };

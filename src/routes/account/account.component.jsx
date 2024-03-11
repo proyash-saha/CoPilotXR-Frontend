@@ -3,6 +3,7 @@ import { useState } from "react";
 import AccountInformation from "../../components/account-information/account-information.component";
 import Subscription from "../../components/subscription/subscription.component";
 import Downloads from "../../components/downloads/downloads.component";
+import ChatBot from "../../components/chatbot/chatbot.component";
 
 import "./account.styles.scss";
 
@@ -38,6 +39,8 @@ const Account = () => {
           {activeTab === DOWNLOAD_HEADER && <Downloads />}
         </div>
       </div>
+
+      <ChatBot />
     </div>
   );
 };
