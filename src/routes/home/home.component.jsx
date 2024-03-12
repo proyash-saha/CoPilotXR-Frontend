@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useContext, useEffect } from "react";
 import Axios from "axios";
 
@@ -71,12 +72,16 @@ const Home = () => {
     const selectedImagesData = selectedImages.map((index) => images[index]);
 
     selectedImagesData.forEach((image) => {
-      const a = document.createElement("a");
-      a.href = image.src;
-      a.download = image.name;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      fetch(image.src)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = image.name;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
     });
   };
 
@@ -129,7 +134,7 @@ const Home = () => {
         <div>
           {selectedImages.length === 0 && images.length !== 0 && (
             <div>
-              <p class="header-message">Select images to download</p>
+              <p className="header-message">Select images to download</p>
             </div>
           )}
         </div>
@@ -146,7 +151,7 @@ const Home = () => {
       {images.length > 0 && (
         <div className="image-container">
           {images.map((image, index) => (
-            <div className="image-box-container ">
+            <div className="image-box-container" key={image.name}>
               <div
                 key={index}
                 className={`image-box ${

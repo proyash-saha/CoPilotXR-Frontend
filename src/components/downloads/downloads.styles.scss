@@ -1,11 +1,11 @@
-.headers {
-  color: rgb(236, 62, 52);
-  font-weight: 500;
-  font-size: 20px;
-  margin-top: 20px;
-}
+.download-info-container {
+  display: flex;
+  justify-content: center;
 
-.info {
-  color: white;
-  font-size: 30px;
+  .headers {
+    color: rgb(236, 62, 52);
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 20px;
+  }
 }

@@ -2,8 +2,10 @@ import "./downloads.styles.scss";
 
 const Subscription = () => {
   return (
-    <div className="subscription-info-container">
-      <div className="headers">No downloads yet!</div>
+    <div className="download-info-container">
+      <div>
+        <div className="headers">No downloads yet!</div>
+      </div>
     </div>
   );
 };
