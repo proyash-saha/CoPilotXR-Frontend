@@ -18,10 +18,16 @@ const Home = () => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
 
+  /**
+   * handleUploadClick uploads selected images to the database
+   * @param {*} event file selection event sent by the browser
+   */
   const handleUploadClick = async (event) => {
+    // get selected images
     const files = event.target.files;
 
     try {
+      // send file to databse
       for (const file of files) {
         const formData = new FormData();
         formData.append("file", file);
@@ -56,6 +62,10 @@ const Home = () => {
     }
   };
 
+  /**
+   * handleImageClick handles image click events
+   * @param {*} index position of the image selected
+   */
   const handleImageClick = (index) => {
     const newSelectedImages = [...selectedImages];
     const currentIndex = newSelectedImages.indexOf(index);
@@ -69,6 +79,9 @@ const Home = () => {
     setSelectedImages(newSelectedImages);
   };
 
+  /**
+   * handleDownloadClick downloads selected images from gallery
+   */
   const handleDownloadClick = () => {
     const selectedImagesData = selectedImages.map((index) => images[index]);
 
@@ -86,6 +99,9 @@ const Home = () => {
     });
   };
 
+  /**
+   * getImages retrieves images for an user, from database
+   */
   const getImages = async () => {
     try {
       const result = await Axios.get(`${BASE_URL_FOR_SERVER}/images`, {
