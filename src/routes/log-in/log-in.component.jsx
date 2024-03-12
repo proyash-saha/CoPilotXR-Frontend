@@ -56,10 +56,10 @@ const LogIn = () => {
         data.status === API_STATUS.unauthorized &&
         data.code === API_CODES.badRequest
       ) {
-        toast("Incorrect username or password.", {
+        toast("Incorrect password.", {
           id: "2",
         });
-        throw new Error("Incorrect username or password.");
+        throw new Error("Incorrect password.");
       }
 
       if (
