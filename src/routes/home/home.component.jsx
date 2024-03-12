@@ -113,21 +113,7 @@ const Home = () => {
 
   return (
     <div className="home-page-container">
-      <div className="buttons-container">
-        {selectedImages.length > 0 && (
-          <div>
-            <button className="download-button" onClick={handleDownloadClick}>
-              Download
-            </button>
-          </div>
-        )}
-
-        {selectedImages.length === 0 && images.length !== 0 && (
-          <div>
-            <p>Select images to downlod</p>
-          </div>
-        )}
-
+      <div className="header-container">
         <label htmlFor="imageUpload" className="upload-button">
           <span>Upload</span>
         </label>
@@ -139,35 +125,35 @@ const Home = () => {
           id="imageUpload"
           style={{ display: "none" }}
         />
+
+        <div>
+          {selectedImages.length === 0 && images.length !== 0 && (
+            <div>
+              <p class="header-message">Select images to download</p>
+            </div>
+          )}
+        </div>
+
+        {selectedImages.length > 0 && (
+          <div>
+            <button className="download-button" onClick={handleDownloadClick}>
+              Download
+            </button>
+          </div>
+        )}
       </div>
 
       {images.length > 0 && (
-        <div style={{ marginTop: "20px", display: "flex", flexWrap: "wrap" }}>
+        <div className="image-container">
           {images.map((image, index) => (
             <div
               key={index}
-              style={{
-                margin: "10px",
-                border: selectedImages.includes(index)
-                  ? "4px solid white"
-                  : "4px solid transparent",
-                borderRadius: "10px",
-                padding: "3px",
-                boxSizing: "border-box",
-              }}
+              className={`image-box ${
+                selectedImages.includes(index) ? "selected" : ""
+              }`}
               onClick={() => handleImageClick(index)}
             >
-              <img
-                src={image.src}
-                alt={image.name}
-                style={{
-                  maxWidth: "200px",
-                  maxHeight: "200px",
-                  width: "auto",
-                  height: "auto",
-                  objectFit: "contain",
-                }}
-              />
+              <img src={image.src} alt={image.name} />
             </div>
           ))}
         </div>

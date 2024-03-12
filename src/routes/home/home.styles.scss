@@ -3,42 +3,72 @@
   padding-right: 20px;
 }
 
-.buttons-container {
+.header-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-start;
+  border-bottom: 0.5px solid grey;
+}
+
+.button-base {
+  cursor: pointer;
+  border: 2px solid white;
+  color: white;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgb(236, 62, 52);
+  font-weight: bold;
+  font-size: 20px;
+  transition: background-color 0.1s ease;
+  margin: 10px;
+
+  &:active {
+    background-color: black;
+  }
 }
 
 .upload-button {
-  cursor: pointer;
-  border: 2px solid white;
-  color: white;
-  border-radius: 10px;
-  padding: 8px 25px;
-  background-color: rgb(236, 62, 52);
-  font-weight: bold;
-  font-size: 20px;
-  transition: background-color 0.1s ease;
-  margin: 10px;
-
-  &:active {
-    background-color: black;
-  }
+  @extend .button-base;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .download-button {
-  cursor: pointer;
-  border: 2px solid white;
-  color: white;
-  border-radius: 10px;
-  padding: 8px 10px;
-  background-color: rgb(236, 62, 52);
-  font-weight: bold;
-  font-size: 20px;
-  transition: background-color 0.1s ease;
-  margin: 10px;
+  @extend .button-base;
+}
 
-  &:active {
-    background-color: black;
+.image-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .image-box {
+    margin: 5px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: transparent 4px solid;
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 250px;
+      max-height: 250px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      padding: 5px;
+    }
   }
+
+  .selected {
+    border: rgb(236, 62, 52) 4px solid;
+  }
+}
+
+.header-message {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
 }
