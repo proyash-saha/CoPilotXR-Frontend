@@ -72,3 +72,10 @@
   font-weight: bold;
   margin-left: 10px;
 }
+
+.image-box-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -146,14 +146,16 @@ const Home = () => {
       {images.length > 0 && (
         <div className="image-container">
           {images.map((image, index) => (
-            <div
-              key={index}
-              className={`image-box ${
-                selectedImages.includes(index) ? "selected" : ""
-              }`}
-              onClick={() => handleImageClick(index)}
-            >
-              <img src={image.src} alt={image.name} />
+            <div className="image-box-container ">
+              <div
+                key={index}
+                className={`image-box ${
+                  selectedImages.includes(index) ? "selected" : ""
+                }`}
+                onClick={() => handleImageClick(index)}
+              >
+                <img src={image.src} alt={image.name} />
+              </div>
             </div>
           ))}
         </div>
